@@ -113,22 +113,24 @@ function tempoEsgotado() {
   }, 500);
 }
 
-// ========== FUNÇÃO: MOSTRAR VITÓRIA ==========
+// ========== FUNÇÃO: MOSTRAR VITÓRIA (CORRIGIDA) ==========
 function mostrarVitoria() {
   const tempoGasto = TEMPO_TOTAL - tempoRestante;
   
   mensagemEl.textContent = `🏆 CORRETO! Você respondeu em ${tempoGasto} segundos!`;
   mensagemEl.className = "message win";
 
-  // Salvar peça conquistada
+  // Salvar progresso (Peça 3 conquistada, próximo desafio é o 4)
   localStorage.setItem('pecasConquistadas', '3');
-  localStorage.setItem('desafioAtual', '3');
+  localStorage.setItem('desafioAtual', '4'); // ← CORRIGIDO!
 
   // Avançar para próximo desafio após 3 segundos
   setTimeout(() => {
-    const avancar = confirm('🎉 Peça #3 conquistada!\n\n🧩 Ir para o próximo desafio?');
+    const avancar = confirm('🎉 Peça #3 conquistada!\n\n🧩 Ir para o Desafio 4 (Caça-Palavras)?');
     if (avancar) {
       window.location.href = '../caca-palavras/index.html';
+    } else {
+      window.location.href = '../index.html';
     }
   }, 2000);
 }

@@ -220,7 +220,7 @@ function atualizarStats() {
   progressEl.style.width = `${progresso}%`;
 }
 
-// ========== FUNÇÃO: MOSTRAR VITÓRIA ==========
+// ========== FUNÇÃO: MOSTRAR VITÓRIA (CORRIGIDA) ==========
 function mostrarVitoria() {
   jogoAtivo = false;
   mensagemEl.textContent = `🏆 PARABÉNS! Você completou com ${3 - vidas} erro(s)!`;
@@ -231,15 +231,17 @@ function mostrarVitoria() {
     card.classList.add("disabled");
   });
   
-  // Salvar peça conquistada
+  // Salvar progresso (Peça 2 conquistada, próximo desafio é o 3)
   localStorage.setItem('pecasConquistadas', '2');
-  localStorage.setItem('desafioAtual', '2');
+  localStorage.setItem('desafioAtual', '3'); // ← CORRIGIDO!
   
   // Avançar para próximo desafio após 3 segundos
   setTimeout(() => {
-    const avancar = confirm('🎉 Peça #2 conquistada!\n\n🧩 Ir para o próximo desafio?');
+    const avancar = confirm('🎉 Peça #2 conquistada!\n\n🧩 Ir para o Desafio 3 (Quiz Relâmpago)?');
     if (avancar) {
       window.location.href = '../quiz/index.html';
+    } else {
+      window.location.href = '../index.html';
     }
   }, 2000);
 }

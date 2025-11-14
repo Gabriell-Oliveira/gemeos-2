@@ -197,20 +197,22 @@ function atualizarStats() {
   progressEl.style.width = `${progresso}%`;
 }
 
-// ========== FUNÇÃO: MOSTRAR VITÓRIA ==========
+// ========== FUNÇÃO: MOSTRAR VITÓRIA (CORRIGIDA) ==========
 function mostrarVitoria() {
   mensagemEl.textContent = "🏆 PARABÉNS! Você encontrou todas as palavras!";
   mensagemEl.className = "message win";
 
-  // Salvar peça conquistada
+  // Salvar progresso (Peça 4 conquistada - FIM!)
   localStorage.setItem('pecasConquistadas', '4');
-  localStorage.setItem('desafioAtual', '4');
+  localStorage.setItem('desafioAtual', '4'); // Permanece 4 (último desafio)
 
   // Avançar para mensagem bíblica após 2 segundos
   setTimeout(() => {
-    const avancar = confirm('🎉 Última peça conquistada!\n\n📖 Ver mensagem especial antes da revelação?');
+    const avancar = confirm('🎉 Última peça conquistada!\n\n📖 Ir para a mensagem especial?');
     if (avancar) {
       window.location.href = '../mensagem-biblica.html';
+    } else {
+      window.location.href = '../index.html';
     }
   }, 2000);
 }

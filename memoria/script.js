@@ -162,23 +162,26 @@ function atualizarStats() {
   progressEl.style.width = `${progresso}%`;
 }
 
-// ========== FUNÇÃO: MOSTRAR VITÓRIA ==========
+// ========== FUNÇÃO: MOSTRAR VITÓRIA (CORRIGIDA) ==========
 function mostrarVitoria() {
   mensagemEl.textContent = `🏆 PARABÉNS! Você completou em ${tentativas} tentativas!`;
   mensagemEl.className = "message win";
 
-  // Salvar peça conquistada
+  // Salvar progresso (Peça 1 conquistada, próximo desafio é o 2)
   localStorage.setItem('pecasConquistadas', '1');
-  localStorage.setItem('desafioAtual', '1');
+  localStorage.setItem('desafioAtual', '2'); // ← CORRIGIDO!
 
   // Avançar para próximo desafio após 3 segundos
   setTimeout(() => {
-    const avancar = confirm('🎉 Peça #1 conquistada!\n\n🧩 Ir para o próximo desafio?');
+    const avancar = confirm('🎉 Peça #1 conquistada!\n\n🧩 Ir para o Desafio 2 (Associação)?');
     if (avancar) {
       window.location.href = '../associacao/index.html';
+    } else {
+      window.location.href = '../index.html';
     }
   }, 2000);
 }
+
 
 // ========== FUNÇÃO: REINICIAR JOGO ==========
 function reiniciarJogo() {

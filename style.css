@@ -270,3 +270,186 @@
         font-size: 1.1rem;
       }
     }
+
+    .progress-section {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem 0;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 215, 0, 0.4);
+  animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.progress-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #FFD700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.progress-pieces {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.piece-slot {
+  width: 90px;
+  height: 90px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 3px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: all 0.4s ease;
+  opacity: 0.5;
+}
+
+.piece-slot.collected {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  border: 3px solid #4CAF50;
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+  opacity: 1;
+  animation: pieceCollect 0.6s ease-out;
+}
+
+@keyframes pieceCollect {
+  0% {
+    transform: scale(0) rotate(-180deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.piece-icon {
+  font-size: 2.5rem;
+}
+
+.piece-slot.collected .piece-icon {
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+}
+
+.piece-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.continue-button {
+  background: linear-gradient(135deg, #4ECDC4, #44A08D);
+  border: none;
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+}
+
+.continue-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* ========== NOVO: ESTADOS DOS ÍCONES ========== */
+.game-icon.available {
+  background: rgba(78, 205, 196, 0.3);
+  border: 2px solid rgba(78, 205, 196, 0.6);
+  animation: glowAvailable 2s ease-in-out infinite;
+}
+
+@keyframes glowAvailable {
+  0%, 100% {
+    box-shadow: 0 5px 20px rgba(78, 205, 196, 0.4);
+  }
+  50% {
+    box-shadow: 0 5px 30px rgba(78, 205, 196, 0.8);
+  }
+}
+
+.game-icon.available::after {
+  content: '▶️';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1.2rem;
+  background: #4ECDC4;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(78, 205, 196, 0.5);
+}
+
+/* ========== NOVO: BOTÃO RESET ========== */
+.reset-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.reset-button:hover {
+  background: rgba(255, 107, 107, 0.2);
+  border-color: rgba(255, 107, 107, 0.5);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* ========== RESPONSIVO (ADIÇÕES) ========== */
+@media (max-width: 768px) {
+  .progress-pieces {
+    gap: 1rem;
+  }
+
+  .piece-slot {
+    width: 70px;
+    height: 70px;
+  }
+
+  .piece-icon {
+    font-size: 2rem;
+  }
+
+  .continue-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+}

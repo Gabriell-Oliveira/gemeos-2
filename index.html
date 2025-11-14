@@ -20,24 +20,54 @@
     
     <div class="title-container">
       <h1>👶 Gêmeos Xavier Calmon 👶</h1>
-      <div class="subtitle">Desafio dos gêmeos com 6 jogos especiais</div>
+      <div class="subtitle">Desafio dos gêmeos com 4 jogos especiais</div>
     </div>
     
     <div class="description">
       <p><strong>Família e amigos, preparem-se para a aventura!</strong></p>
-      <p>Acertem 6 desafios e desbloqueiem peças importantes para descobrirem os nossos nomes! 🌟</p>
+      <p>Acertem 4 desafios e desbloqueiem peças importantes para descobrirem os nossos nomes! 🌟</p>
+    </div>
+
+    <!-- NOVO: Progresso visual -->
+    <div class="progress-section" id="progress-section" style="display: none;">
+      <div class="progress-title">📊 Seu Progresso</div>
+      <div class="progress-pieces">
+        <div class="piece-slot" data-piece="1">
+          <div class="piece-icon">🧩</div>
+          <div class="piece-label">Peça 1</div>
+        </div>
+        <div class="piece-slot" data-piece="2">
+          <div class="piece-icon">🧩</div>
+          <div class="piece-label">Peça 2</div>
+        </div>
+        <div class="piece-slot" data-piece="3">
+          <div class="piece-icon">🧩</div>
+          <div class="piece-label">Peça 3</div>
+        </div>
+        <div class="piece-slot" data-piece="4">
+          <div class="piece-icon">🧩</div>
+          <div class="piece-label">Peça 4</div>
+        </div>
+      </div>
+      <button class="continue-button" onclick="continuarAventura()">
+        ➡️ CONTINUAR DE ONDE PAREI
+      </button>
     </div>
 
     <div class="games-preview">
-      <div class="game-icon unlocked" title="Jogo da Memória">🧠</div>
-      <div class="game-icon locked" title="Associação">🔗</div>
-      <div class="game-icon locked" title="Quiz Bíblico">📖</div>
-      <div class="game-icon locked" title="Caça-Palavras">📝</div>
-
+      <div class="game-icon unlocked" data-game="1" title="Jogo da Memória">🧠</div>
+      <div class="game-icon locked" data-game="2" title="Associação">🔗</div>
+      <div class="game-icon locked" data-game="3" title="Quiz Bíblico">📖</div>
+      <div class="game-icon locked" data-game="4" title="Caça-Palavras">🔍</div>
     </div>
 
     <button class="start-button" onclick="iniciarAventura()">
       🚀 COMEÇAR A AVENTURA
+    </button>
+
+    <!-- NOVO: Botão de reset (debug) -->
+    <button class="reset-button" onclick="resetarProgresso()" title="Reiniciar todo o progresso">
+      🔄 Resetar Progresso
     </button>
   </div>
 
