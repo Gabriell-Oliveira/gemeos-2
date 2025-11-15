@@ -27,6 +27,9 @@ const associacoes = [
   }
 ];
 
+// ========== ÁUDIO ==========
+const audioChoro = new Audio('../audio/choro.mp3');
+
 // ========== VARIÁVEIS DO JOGO ==========
 let vidas = 3;
 let acertos = 0;
@@ -143,9 +146,12 @@ function acertoCorreto(segundaCard) {
   }
 }
 
-// ========== FUNÇÃO: ERRO INCORRETO ==========
+// ========== FUNÇÃO: ERRO INCORRETO (COM ÁUDIO!) ==========
 function erroIncorreto(segundaCard) {
   const primeiraCard = cartaSelecionada.card;
+  
+  // TOCAR SOM DE CHORO
+  tocarSomChoro();
   
   desenharLinha(primeiraCard, segundaCard, "wrong", false);
   primeiraCard.classList.remove("selected");
@@ -161,6 +167,14 @@ function erroIncorreto(segundaCard) {
   if (vidas === 0) {
     setTimeout(mostrarDerrota, 1000);
   }
+}
+
+// ========== FUNÇÃO: TOCAR SOM DE CHORO ==========
+function tocarSomChoro() {
+  audioChoro.currentTime = 0;
+  audioChoro.play().catch(err => {
+    console.log('Erro ao tocar áudio:', err);
+  });
 }
 
 // ========== FUNÇÃO: DESENHAR LINHA ==========
@@ -205,7 +219,7 @@ function atualizarStats() {
   progressEl.style.width = `${progresso}%`;
 }
 
-// ========== FUNÇÃO: MOSTRAR VITÓRIA (SEM ALERT!) ==========
+// ========== FUNÇÃO: MOSTRAR VITÓRIA ==========
 function mostrarVitoria() {
   jogoAtivo = false;
   mensagemEl.textContent = `🏆 PARABÉNS! Você completou com ${3 - vidas} erro(s)!`;

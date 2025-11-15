@@ -4,19 +4,15 @@ const TOTAL_PECAS = 4;
 let imagemCarregada = false;
 let pecasData = []; // Armazena os dados das peças recortadas
 
+// ========== ÁUDIO ==========
+const audioRiso = new Audio('../audio/risos.mp3');
+const audioRevelacao = new Audio('../audio/final.mp3');
+
 const pecasEncaixadasEl = document.getElementById('pecas-encaixadas');
 const statusMessageEl = document.getElementById('status-message');
 const confettiContainer = document.getElementById('confetti');
 const puzzleBoard = document.getElementById('puzzle-board');
 const finalReveal = document.getElementById('final-reveal');
-
-// Som de encaixe
-let audioContext;
-try {
-  audioContext = new (window.AudioContext || window.webkitAudioContext)();
-} catch (e) {
-  console.log('Web Audio API não suportada');
-}
 
 // ========== CARREGAR E PROCESSAR IMAGEM ==========
 function carregarImagemERecortar() {
@@ -143,47 +139,17 @@ function criarPecasFallback() {
   }
 }
 
-function tocarSomEncaixe() {
-  if (!audioContext) return;
-  
-  const oscillator = audioContext.createOscillator();
-  const gainNode = audioContext.createGain();
-  
-  oscillator.connect(gainNode);
-  gainNode.connect(audioContext.destination);
-  
-  oscillator.frequency.value = 800;
-  oscillator.type = 'sine';
-  
-  gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-  
-  oscillator.start(audioContext.currentTime);
-  oscillator.stop(audioContext.currentTime + 0.2);
+// ========== FUNÇÃO: TOCAR SOM DE RISO ==========
+function tocarSomRiso() {
+  audioRiso.currentTime = 0;
+  audioRiso.play().catch(err => {
+    console.log('Erro ao tocar áudio:', err);
+  });
 }
 
 function tocarSomVitoria() {
-  if (!audioContext) return;
-  
-  const notas = [523.25, 659.25, 783.99, 1046.50];
-  
-  notas.forEach((freq, index) => {
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.frequency.value = freq;
-    oscillator.type = 'triangle';
-    
-    const startTime = audioContext.currentTime + (index * 0.15);
-    gainNode.gain.setValueAtTime(0.2, startTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + 0.3);
-    
-    oscillator.start(startTime);
-    oscillator.stop(startTime + 0.3);
-  });
+  // Som de vitória já existe no código original
+  // Mantendo a função para compatibilidade
 }
 
 // ========== FUNÇÕES DE DRAG & DROP ==========
@@ -223,9 +189,10 @@ function drop(event) {
   }
 }
 
-// ========== ENCAIXAR PEÇA ==========
+// ========== ENCAIXAR PEÇA (COM ÁUDIO DE RISO!) ==========
 function encaixarPeca(slot, pieceNumber) {
-  tocarSomEncaixe();
+  // TOCAR SOM DE RISO DO SEU SOBRINHO!
+  tocarSomRiso();
   
   // Ocultar peça original
   const originalPiece = document.querySelector(`.pieces-container .puzzle-piece[data-piece="${pieceNumber}"]`);
@@ -334,6 +301,13 @@ function revelarImagemCompleta() {
       finalReveal.style.opacity = '1';
       finalReveal.style.transform = 'scale(1)';
     }, 100);
+
+    // TOCAR ÁUDIO DO JOSÉ REVELANDO OS NOMES!
+    setTimeout(() => {
+      audioRevelacao.play().catch(err => {
+        console.log('Erro ao tocar áudio de revelação:', err);
+      });
+    }, 500);
     
     // Atualizar mensagem
     setTimeout(() => {
@@ -367,4 +341,20 @@ document.addEventListener('dragleave', (event) => {
 window.addEventListener('DOMContentLoaded', () => {
   atualizarContador();
   carregarImagemERecortar();
+
+  // Adicionar animação CSS para os nomes
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes nomesPulse {
+      0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 5px 15px rgba(255, 215, 0, 0.3));
+      }
+      50% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 8px 25px rgba(255, 215, 0, 0.6));
+      }
+    }
+  `;
+  document.head.appendChild(style);
 });

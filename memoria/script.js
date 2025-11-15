@@ -32,6 +32,9 @@ const santos = [
   }
 ];
 
+// ========== ÁUDIO ==========
+const audioChoro = new Audio('../audio/choro.mp3');
+
 // ========== VARIÁVEIS DO JOGO ==========
 const tabuleiro = document.getElementById("tabuleiro");
 const mensagemEl = document.getElementById("mensagem");
@@ -86,7 +89,7 @@ function criarTabuleiro() {
   });
 }
 
-// ========== FUNÇÃO: VIRAR CARTA (CORRIGIDA!) ==========
+// ========== FUNÇÃO: VIRAR CARTA (COM ÁUDIO!) ==========
 function virarCarta(carta, santo) {
   // Verificar se pode virar
   if (bloqueado) return;
@@ -124,7 +127,9 @@ function virarCarta(carta, santo) {
         setTimeout(mostrarVitoria, 500);
       }
     } else {
-      // ❌ PAR ERRADO!
+      // ❌ PAR ERRADO! TOCAR SOM DE CHORO
+      tocarSomChoro();
+      
       primeiraCarta.carta.classList.add("wrong");
       segundaCarta.carta.classList.add("wrong");
 
@@ -136,6 +141,14 @@ function virarCarta(carta, santo) {
       }, 1000);
     }
   }, 1000); // ⏱️ 1 SEGUNDO para ver as duas cartas antes de verificar
+}
+
+// ========== FUNÇÃO: TOCAR SOM DE CHORO ==========
+function tocarSomChoro() {
+  audioChoro.currentTime = 0; // Reinicia o áudio
+  audioChoro.play().catch(err => {
+    console.log('Erro ao tocar áudio:', err);
+  });
 }
 
 // ========== FUNÇÃO: RESETAR CARTAS SELECIONADAS ==========

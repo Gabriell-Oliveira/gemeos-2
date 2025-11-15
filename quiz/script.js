@@ -2,6 +2,9 @@
 const TEMPO_TOTAL = 30; // segundos
 const RESPOSTA_CORRETA = "André";
 
+// ========== ÁUDIO ==========
+const audioChoro = new Audio('../audio/choro.mp3');
+
 // ========== VARIÁVEIS DO JOGO ==========
 let tempoRestante = TEMPO_TOTAL;
 let timerInterval = null;
@@ -52,7 +55,7 @@ function atualizarTimer() {
   }
 }
 
-// ========== FUNÇÃO: SELECIONAR ALTERNATIVA ==========
+// ========== FUNÇÃO: SELECIONAR ALTERNATIVA (COM ÁUDIO!) ==========
 function selecionarAlternativa(botao, resposta) {
   if (!jogoAtivo) return;
 
@@ -72,7 +75,8 @@ function selecionarAlternativa(botao, resposta) {
     mostrarVitoria();
     
   } else {
-    // ERROU! ✗
+    // ERROU! ✗ TOCAR SOM DE CHORO
+    tocarSomChoro();
     
     // Apenas mostrar erro visual no botão clicado
     botao.classList.add("wrong");
@@ -84,6 +88,14 @@ function selecionarAlternativa(botao, resposta) {
     
     // NÃO para o timer, continua jogando!
   }
+}
+
+// ========== FUNÇÃO: TOCAR SOM DE CHORO ==========
+function tocarSomChoro() {
+  audioChoro.currentTime = 0;
+  audioChoro.play().catch(err => {
+    console.log('Erro ao tocar áudio:', err);
+  });
 }
 
 // ========== FUNÇÃO: TEMPO ESGOTADO ==========
@@ -104,7 +116,7 @@ function tempoEsgotado() {
   restartBtn.classList.remove("hidden");
 }
 
-// ========== FUNÇÃO: MOSTRAR VITÓRIA (SEM ALERT!) ==========
+// ========== FUNÇÃO: MOSTRAR VITÓRIA ==========
 function mostrarVitoria() {
   const tempoGasto = TEMPO_TOTAL - tempoRestante;
   
@@ -120,8 +132,6 @@ function mostrarVitoria() {
     window.location.href = '../pecas/peca-conquistada.html?peca=3';
   }, 2000);
 }
-
-// (Função mostrarDerrota foi removida - não é mais necessária)
 
 // ========== FUNÇÃO: REINICIAR JOGO ==========
 function reiniciarJogo() {
