@@ -18,7 +18,7 @@ Uma experiência interativa baseada na web, projetada para revelar os nomes de b
 
 ## 🚀 Demo Online
 
-Acesse a aplicação: [gabriell-oliveira.github.io/gemeos-2](https://gabriell-oliveira.github.io/gemeos-2/)
+Acesse a aplicação: [gabriell-oliveira.github.io/Revelacao-dos-gemeos](https://gabriell-oliveira.github.io/Revelacao-dos-gemeos/)
 
 ## 🎯 Estrutura do Jogo
 
@@ -53,7 +53,7 @@ Monte as 4 peças conquistadas para revelar os nomes dos gêmeos com uma transi�
 
 ### Estrutura de Arquivos
 ```
-gemeos-2/
+Revelacao-dos-gemeos/
 ├── index.html              # Página inicial principal
 ├── main.js                 # Lógica de acompanhamento de progresso
 ├── style.css               # Estilos globais
@@ -73,12 +73,12 @@ gemeos-2/
 ### Início Rápido
 1. Clone o repositório:
 ```bash
-git clone https://github.com/gabriell-oliveira/gemeos-2.git
+git clone https://github.com/gabriell-oliveira/Revelacao-dos-gemeos.git
 ```
 
 2. Navegue até o diretório do projeto:
 ```bash
-cd gemeos-2
+cd Revelacao-dos-gemeos
 ```
 
 3. Abra com um servidor local (recomendado):
